@@ -1,6 +1,7 @@
 defmodule Xunit.Tests do
   def main(_argv) do
     Xunit.run_function(&test_can_run_function/0)
+    Xunit.run_function(&test_assert_equal_raises_on_unequal/0)
   end
 
   def test_can_run_function() do
@@ -9,6 +10,15 @@ defmodule Xunit.Tests do
       IO.puts("FAILURE")
     rescue
       _e in RuntimeError -> IO.puts("SUCCESS")
+    end
+  end
+
+  def test_assert_equal_raises_on_unequal() do
+    try do
+      Xunit.assert_equal(1, 2)
+      IO.puts("FAILURE")
+    rescue
+      _e in Xunit.Failure -> IO.puts("SUCCESS")
     end
   end
 end
