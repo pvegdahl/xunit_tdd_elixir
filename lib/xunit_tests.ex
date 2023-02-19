@@ -11,7 +11,7 @@ defmodule Xunit.Tests do
       Xunit.run_function(fn -> raise "Expected" end)
       IO.puts("FAILURE")
     rescue
-      _e in RuntimeError -> IO.puts("SUCCESS")
+      _e in RuntimeError -> :ok
     end
   end
 
@@ -20,14 +20,13 @@ defmodule Xunit.Tests do
       Xunit.assert_equal(1, 2)
       IO.puts("FAILURE")
     rescue
-      _e in Xunit.Failure -> IO.puts("SUCCESS")
+      _e in Xunit.Failure -> :ok
     end
   end
 
   def test_assert_equal_does_not_raise_on_equal() do
     try do
       Xunit.assert_equal(1, 1)
-      IO.puts("SUCCESS")
     rescue
       _e in Xunit.Failure -> IO.puts("FAILURE")
     end
@@ -36,6 +35,5 @@ defmodule Xunit.Tests do
   def test_print_on_success() do
     Xunit.run_function_helper(fn -> :ok end)
     |> Xunit.assert_equal("SUCCESS")
-    IO.puts("SUCCESS")
   end
 end
