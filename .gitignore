@@ -24,3 +24,6 @@ xunit_tdd_elixir-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+# The escript built artifact
+/xunit
