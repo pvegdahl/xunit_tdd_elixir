@@ -18,8 +18,12 @@ defmodule Xunit do
   end
 
   def run_function_helper(test_function) do
-    test_function.()
-    "SUCCESS"
+    try do
+      test_function.()
+      "SUCCESS"
+    rescue
+      _e in Xunit.Failure -> "FAILURE"
+    end
   end
 
   def assert_equal(actual, expected)

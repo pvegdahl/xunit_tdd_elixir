@@ -4,6 +4,7 @@ defmodule Xunit.Tests do
     Xunit.run_function(&test_assert_equal_raises_on_unequal/0)
     Xunit.run_function(&test_assert_equal_does_not_raise_on_equal/0)
     Xunit.run_function(&test_print_on_success/0)
+    Xunit.run_function(&test_print_on_failure/0)
   end
 
   def test_can_run_function() do
@@ -35,5 +36,10 @@ defmodule Xunit.Tests do
   def test_print_on_success() do
     Xunit.run_function_helper(fn -> :ok end)
     |> Xunit.assert_equal("SUCCESS")
+  end
+
+  def test_print_on_failure() do
+    Xunit.run_function_helper(fn -> Xunit.assert_equal(86, 99) end)
+    |> Xunit.assert_equal("FAILURE")
   end
 end
