@@ -22,7 +22,7 @@ defmodule Xunit do
       test_function.()
       "[SUCCESS] #{get_function_name(test_function)}"
     rescue
-      _e in Xunit.Failure -> "FAILURE"
+      _e in Xunit.Failure -> "[FAILURE] #{get_function_name(test_function)}"
     end
   end
 

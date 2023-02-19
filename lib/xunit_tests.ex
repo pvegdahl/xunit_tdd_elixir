@@ -49,7 +49,7 @@ defmodule Xunit.Tests do
 
   def test_print_on_failure() do
     Xunit.run_function_helper(&failing_function/0)
-    |> Xunit.assert_equal("FAILURE")
+    |> Xunit.assert_equal("[FAILURE] failing_function")
   end
 
   defp failing_function(), do: Xunit.assert_equal(86, 99)
