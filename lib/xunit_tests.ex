@@ -8,29 +8,36 @@ defmodule Xunit.Tests do
   end
 
   def test_can_run_function() do
+    can_run_function_helper()
+    |> Xunit.assert_equal(:success)
+  end
+
+  defp can_run_function_helper() do
     try do
       Xunit.run_function(fn -> raise "Expected" end)
-      IO.puts("FAILURE")
+      :failure
     rescue
-      _e in RuntimeError -> :ok
+      _e in RuntimeError -> :success
     end
   end
 
   def test_assert_equal_raises_on_unequal() do
+    assert_equal_helper(1, 2)
+    |> Xunit.assert_equal(:unequal)
+  end
+
+  defp assert_equal_helper(a, b) do
     try do
-      Xunit.assert_equal(1, 2)
-      IO.puts("FAILURE")
+      Xunit.assert_equal(a, b)
+      :equal
     rescue
-      _e in Xunit.Failure -> :ok
+      _e in Xunit.Failure -> :unequal
     end
   end
 
   def test_assert_equal_does_not_raise_on_equal() do
-    try do
-      Xunit.assert_equal(1, 1)
-    rescue
-      _e in Xunit.Failure -> IO.puts("FAILURE")
-    end
+    assert_equal_helper(1, 1)
+    |> Xunit.assert_equal(:equal)
   end
 
   def test_print_on_success() do
