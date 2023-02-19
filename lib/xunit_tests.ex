@@ -1,6 +1,6 @@
 defmodule Xunit.Tests do
   def main(_argv) do
-    test_can_run_function()
+    Xunit.run_function(&test_can_run_function/0)
   end
 
   def test_can_run_function() do
