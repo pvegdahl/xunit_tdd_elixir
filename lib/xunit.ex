@@ -23,6 +23,7 @@ defmodule Xunit do
       "[SUCCESS] #{get_function_name(test_function)}"
     rescue
       e in Xunit.Failure -> "[FAILURE] #{get_function_name(test_function)}: #{Exception.message(e)}"
+      e in RuntimeError -> "[EXCEPTION] #{get_function_name(test_function)}: #{Exception.message(e)}"
     end
   end
 
