@@ -42,7 +42,7 @@ defmodule Xunit.Tests do
 
   def test_print_on_success() do
     Xunit.run_function_helper(&passing_function/0)
-    |> Xunit.assert_equal("SUCCESS")
+    |> Xunit.assert_equal("[SUCCESS] passing_function")
   end
 
   defp passing_function(), do: Xunit.assert_equal(24601, 24601)

@@ -20,10 +20,19 @@ defmodule Xunit do
   def run_function_helper(test_function) do
     try do
       test_function.()
-      "SUCCESS"
+      "[SUCCESS] #{get_function_name(test_function)}"
     rescue
       _e in Xunit.Failure -> "FAILURE"
     end
+  end
+
+  defp get_function_name(function) do
+    function
+    |> Function.info(:name)
+    |> elem(1)
+    |> Atom.to_string()
+    |> String.replace_leading("-fun.", "")
+    |> String.replace_trailing("/0-", "")
   end
 
   def assert_equal(actual, expected)
