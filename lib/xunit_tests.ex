@@ -41,12 +41,16 @@ defmodule Xunit.Tests do
   end
 
   def test_print_on_success() do
-    Xunit.run_function_helper(fn -> :ok end)
+    Xunit.run_function_helper(&passing_function/0)
     |> Xunit.assert_equal("SUCCESS")
   end
 
+  defp passing_function(), do: Xunit.assert_equal(24601, 24601)
+
   def test_print_on_failure() do
-    Xunit.run_function_helper(fn -> Xunit.assert_equal(86, 99) end)
+    Xunit.run_function_helper(&failing_function/0)
     |> Xunit.assert_equal("FAILURE")
   end
+
+  defp failing_function(), do: Xunit.assert_equal(86, 99)
 end
