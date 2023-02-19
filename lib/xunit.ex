@@ -1,4 +1,4 @@
-defmodule XunitTddElixir do
+defmodule Xunit do
   @moduledoc """
   Documentation for `XunitTddElixir`.
   """
@@ -12,7 +12,7 @@ defmodule XunitTddElixir do
       :world
 
   """
-  def hello do
-    :world
+  def run_function(test_function) do
+    test_function.()
   end
 end
