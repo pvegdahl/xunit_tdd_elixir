@@ -22,7 +22,7 @@ defmodule Xunit do
       test_function.()
       "[SUCCESS] #{get_function_name(test_function)}"
     rescue
-      _e in Xunit.Failure -> "[FAILURE] #{get_function_name(test_function)}"
+      e in Xunit.Failure -> "[FAILURE] #{get_function_name(test_function)}: #{Exception.message(e)}"
     end
   end
 
@@ -37,7 +37,7 @@ defmodule Xunit do
 
   def assert_equal(actual, expected)
   def assert_equal(x, x), do: :ok
-  def assert_equal(_actual, _expected) do
-    raise Xunit.Failure
+  def assert_equal(actual, expected) do
+    raise Xunit.Failure, message: "Expected #{expected}, got #{actual}"
   end
 end
