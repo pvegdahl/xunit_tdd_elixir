@@ -16,6 +16,8 @@ defmodule Xunit do
     test_function.()
   end
 
+  def assert_equal(expected, actual)
+  def assert_equal(x, x), do: :ok
   def assert_equal(_expected, _actual) do
     raise Xunit.Failure
   end
