@@ -13,6 +13,10 @@ defmodule Xunit do
 
   """
   def run_function(test_function) do
+    run_function_helper(test_function)
+  end
+
+  def run_function_helper(test_function) do
     test_function.()
   end
 
