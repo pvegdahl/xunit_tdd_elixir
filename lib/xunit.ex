@@ -31,10 +31,14 @@ defmodule Xunit do
     |> Enum.map(fn func -> run_function_helper(func) end)
   end
 
-  defp is_test_function?({name, _arity}) do
-    name
+  defp is_test_function?({name, arity}) do
+    is_test_name = name
     |> Atom.to_string()
     |> String.starts_with?("test")
+
+    is_zero_arity = arity == 0
+
+    is_test_name and is_zero_arity
   end
 
   defp get_function_name(function) do

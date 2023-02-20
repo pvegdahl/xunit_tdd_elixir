@@ -52,6 +52,11 @@ defmodule Xunit.Tests do
     Xunit.run_module_helper(TestSkipNonTestFunctions)
     |> Xunit.assert_equal(["[SUCCESS] test_pass"])
   end
+
+  def test_skip_functions_with_non_zero_arity() do
+    Xunit.run_module_helper(TestSkipFunctionsWithNonZeroArity)
+    |> Xunit.assert_equal(["[SUCCESS] test_zero"])
+  end
 end
 
 defmodule TestRunAllFunctions do
@@ -64,5 +69,8 @@ defmodule TestSkipNonTestFunctions do
   def something_else(), do: :ok
 end
 
-# TODO
-# Do not run functions with arity != 0
+defmodule TestSkipFunctionsWithNonZeroArity do
+  def test_zero(), do: Xunit.assert_equal(1, 1)
+  def test_one(a), do: a
+  def test_two(a, b), do: a + b
+end
