@@ -26,8 +26,15 @@ defmodule Xunit do
 
   def run_module_helper(test_module) do
     test_module.__info__(:functions)
+    |> Enum.filter(&is_test_function?/1)
     |> Enum.map(fn {name, arity} -> Function.capture(test_module, name, arity) end)
     |> Enum.map(fn func -> run_function_helper(func) end)
+  end
+
+  defp is_test_function?({name, _arity}) do
+    name
+    |> Atom.to_string()
+    |> String.starts_with?("test")
   end
 
   defp get_function_name(function) do
