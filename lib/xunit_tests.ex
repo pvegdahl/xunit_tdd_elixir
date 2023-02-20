@@ -1,12 +1,6 @@
 defmodule Xunit.Tests do
   def main(_argv) do
-    Xunit.run_function(&test_assert_equal_raises_on_unequal/0)
-    Xunit.run_function(&test_assert_equal_does_not_raise_on_equal/0)
-    Xunit.run_function(&test_print_on_success/0)
-    Xunit.run_function(&test_print_on_failure/0)
-    Xunit.run_function(&test_print_other_exceptions/0)
-    Xunit.run_function(&test_run_all_functions_in_a_module/0)
-    Xunit.run_function(&test_skip_non_test_functions_in_module/0)
+    Xunit.run_module(Xunit.Tests)
   end
 
   def test_assert_equal_raises_on_unequal() do
@@ -71,6 +65,4 @@ defmodule TestSkipNonTestFunctions do
 end
 
 # TODO
-# Run all test functions in a module
-# Do not run non-test functions in a module
 # Do not run functions with arity != 0
