@@ -21,12 +21,10 @@ defmodule Xunit.MixProject do
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
-    [
-    ]
+    []
   end
 
   defp escript_config() do
     [main_module: Xunit.Tests]
   end
-
 end

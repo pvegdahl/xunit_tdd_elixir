@@ -41,7 +41,7 @@ defmodule Xunit.Tests do
     |> Xunit.assert_equal("[EXCEPTION] exception_function: Oh no")
   end
 
-  defp exception_function(), do: raise "Oh no"
+  defp exception_function(), do: raise("Oh no")
 
   def test_run_all_functions_in_a_module() do
     Xunit.run_module_helper(TestRunAllFunctions)

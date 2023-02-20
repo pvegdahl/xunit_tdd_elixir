@@ -14,8 +14,11 @@ defmodule Xunit do
       test_function.()
       "[SUCCESS] #{get_function_name(test_function)}"
     rescue
-      e in Xunit.Failure -> "[FAILURE] #{get_function_name(test_function)}: #{Exception.message(e)}"
-      e in RuntimeError -> "[EXCEPTION] #{get_function_name(test_function)}: #{Exception.message(e)}"
+      e in Xunit.Failure ->
+        "[FAILURE] #{get_function_name(test_function)}: #{Exception.message(e)}"
+
+      e in RuntimeError ->
+        "[EXCEPTION] #{get_function_name(test_function)}: #{Exception.message(e)}"
     end
   end
 
@@ -32,9 +35,10 @@ defmodule Xunit do
   end
 
   defp is_test_function?({name, arity}) do
-    is_test_name = name
-    |> Atom.to_string()
-    |> String.starts_with?("test")
+    is_test_name =
+      name
+      |> Atom.to_string()
+      |> String.starts_with?("test")
 
     is_zero_arity = arity == 0
 
@@ -52,6 +56,7 @@ defmodule Xunit do
 
   def assert_equal(actual, expected)
   def assert_equal(x, x), do: :ok
+
   def assert_equal(actual, expected) do
     raise Xunit.Failure, message: "Expected #{expected}, got #{actual}"
   end
