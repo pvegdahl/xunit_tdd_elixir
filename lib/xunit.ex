@@ -4,11 +4,13 @@ defmodule Xunit do
   framework to test itself while building it.  This is a fun exercise, and you can learn a lot both
   about TDD and the details of a language.
   """
+  @spec run_function(test_function :: function()) :: :ok
   def run_function(test_function) do
     run_function_helper(test_function)
     |> IO.puts()
   end
 
+  @spec run_function_helper(test_function :: function()) :: String.t()
   def run_function_helper(test_function) do
     try do
       test_function.()
@@ -22,11 +24,17 @@ defmodule Xunit do
     end
   end
 
+  @doc """
+  run_module is the primary entry point to this module.  Pass your test module into this function
+  and it will run all of the tests and report the results to stdio.
+  """
+  @spec run_module(test_module :: module()) :: :ok
   def run_module(test_module) do
     run_module_helper(test_module)
     |> Enum.each(&IO.puts/1)
   end
 
+  @spec run_module_helper(test_module :: module()) :: [String.t()]
   def run_module_helper(test_module) do
     test_module.__info__(:functions)
     |> Enum.filter(&is_test_function?/1)
@@ -54,6 +62,7 @@ defmodule Xunit do
     |> String.replace_trailing("/0-", "")
   end
 
+  @spec assert_equal(actual :: any(), expected :: any()) :: :ok
   def assert_equal(actual, expected)
   def assert_equal(x, x), do: :ok
 
