@@ -1,21 +1,9 @@
 # XunitTddElixir
 
-**TODO: Add description**
+As a learning exercise, I'm building a XUnit (ish) style unit test framework using test driven development and using the framework I am building to test itself.  This is an exercise suggested by Kent Beck in his classic TDD book.  Please don't use this framework for any real projects, just use the one that comes with Elixir.
 
-## Installation
+You can run the tests for this project with:
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `xunit_tdd_elixir` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:xunit_tdd_elixir, "~> 0.1.0"}
-  ]
-end
 ```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/xunit_tdd_elixir](https://hexdocs.pm/xunit_tdd_elixir).
-
+mix escript.build && ./xunit
+```
