@@ -19,6 +19,17 @@ defmodule Xunit do
     end
   end
 
+  def run_module(test_module) do
+    run_module_helper(test_module)
+    |> Enum.each(&IO.puts/1)
+  end
+
+  def run_module_helper(test_module) do
+    test_module.__info__(:functions)
+    |> Enum.map(fn {name, arity} -> Function.capture(test_module, name, arity) end)
+    |> Enum.map(fn func -> run_function_helper(func) end)
+  end
+
   defp get_function_name(function) do
     function
     |> Function.info(:name)

@@ -5,6 +5,7 @@ defmodule Xunit.Tests do
     Xunit.run_function(&test_print_on_success/0)
     Xunit.run_function(&test_print_on_failure/0)
     Xunit.run_function(&test_print_other_exceptions/0)
+    Xunit.run_function(&test_run_all_functions_in_a_module/0)
   end
 
   def test_assert_equal_raises_on_unequal() do
@@ -46,4 +47,19 @@ defmodule Xunit.Tests do
   end
 
   defp exception_function(), do: raise "Oh no"
+
+  def test_run_all_functions_in_a_module() do
+    Xunit.run_module_helper(TestRunAllFunctions)
+    |> Xunit.assert_equal(["[FAILURE] test_fail: Expected 3, got 2", "[SUCCESS] test_pass"])
+  end
 end
+
+defmodule TestRunAllFunctions do
+  def test_pass(), do: Xunit.assert_equal(1, 1)
+  def test_fail(), do: Xunit.assert_equal(2, 3)
+end
+
+# TODO
+# Run all test functions in a module
+# Do not run non-test functions in a module
+# Do not run functions with arity != 0
