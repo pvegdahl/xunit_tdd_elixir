@@ -1,16 +1,8 @@
 defmodule Xunit do
   @moduledoc """
-  Documentation for `XunitTddElixir`.
-  """
-
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> XunitTddElixir.hello()
-      :world
-
+  This is a learning project.  I used TDD to write a unit test framework, and used the same
+  framework to test itself while building it.  This is a fun exercise, and you can learn a lot both
+  about TDD and the details of a language.
   """
   def run_function(test_function) do
     run_function_helper(test_function)
