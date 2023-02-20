@@ -7,3 +7,10 @@ You can run the tests for this project with:
 ```
 mix escript.build && ./xunit
 ```
+
+You can setup and run dialyzer to validate the type specs using:
+
+```
+mix do deps.get, deps.compile
+mix dialyzer
+```
